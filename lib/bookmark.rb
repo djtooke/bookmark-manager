@@ -1,6 +1,10 @@
 class Bookmark
 
-    @@list = []
+    @@list = [
+      'www.google.com',
+      'www.makersacademy.com',
+      'www.mylittlepony.com'
+    ]
 
   def self.all
     @@list
