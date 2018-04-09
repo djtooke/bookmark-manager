@@ -6,6 +6,7 @@ gem "sinatra"
 gem "shotgun"
 gem "selenium-webdriver"
 gem "rake"
+gem "rspec-sinatra"
 
 group :development, :test do
   gem "rspec"

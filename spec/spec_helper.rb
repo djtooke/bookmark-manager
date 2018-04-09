@@ -21,7 +21,7 @@ require 'capybara/rspec'
 require 'rspec'
 # require './spec/features/web_helpers.rb'
 
-Capybara.app = Bookmark
+Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
