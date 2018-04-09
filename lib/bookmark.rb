@@ -1,18 +1,34 @@
+require 'pg'
+
 class Bookmark
 
-    @@list = [
-      'www.google.com',
-      'www.makersacademy.com',
-      'www.mylittlepony.com'
-    ]
-
   def self.all
-    @@list
-  end
 
-  def add
-    @@list << self
-  end
+    begin
 
+        con = PG.connect :dbname => 'bookmark_manager', :user => 'lorrainephillips'
+
+        rs = con.exec "SELECT * FROM bookmarks"
+
+        @list = []
+
+        rs.each do |row|
+          @list << "%s %s" % [ row['id'], row['url'] ]
+        end
+
+        @list
+
+    rescue PG::Error => e
+
+        puts e.message
+
+    ensure
+
+        rs.clear if rs
+        con.close if con
+
+    end
+
+  end
 
 end
