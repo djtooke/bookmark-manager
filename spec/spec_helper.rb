@@ -19,6 +19,7 @@ require './app.rb'
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'setup_test_database.rb'
 # require './spec/features/web_helpers.rb'
 
 Capybara.app = BookmarkManager
@@ -56,6 +57,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     allow(ENV).to receive(:[]).with("DATABASE").and_return('bookmark_manager_test')
+    reset_and_fill
   end
 
 # The settings below are suggested to provide a good initial experience
