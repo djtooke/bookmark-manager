@@ -1,13 +1,15 @@
 require 'pg'
 require_relative '../local.rb'
 
+ENV['DATABASE'] = 'bookmark_manager'
+
 class Bookmark
 
   def self.all
 
     begin
 
-        con = PG.connect :dbname => 'bookmark_manager', :user => USER
+        con = PG.connect :dbname => ENV['DATABASE'], :user => USER
 
         rs = con.exec "SELECT * FROM bookmarks"
 
