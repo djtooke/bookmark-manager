@@ -1,4 +1,5 @@
 require 'pg'
+require_relative '../local.rb'
 
 class Bookmark
 
@@ -6,7 +7,7 @@ class Bookmark
 
     begin
 
-        con = PG.connect :dbname => 'bookmark_manager', :user => 'lorrainephillips'
+        con = PG.connect :dbname => 'bookmark_manager', :user => USER
 
         rs = con.exec "SELECT * FROM bookmarks"
 
