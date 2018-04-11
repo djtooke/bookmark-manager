@@ -6,11 +6,9 @@ def reset_and_fill
       con.exec "INSERT INTO bookmarks(id, url) VALUES('2', 'http://makersacademy.com')"
 
   rescue PG::Error => e
-
       puts e.message
 
   ensure
-
       con.close if con
 
   end

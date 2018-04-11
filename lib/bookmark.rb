@@ -24,11 +24,9 @@ class Bookmark
       @list
 
     # rescue PG::Error => e
-    #
     #     puts e.message
     #
     # ensure
-    #
     #     rs.clear if rs
     #     con.close if con
 
