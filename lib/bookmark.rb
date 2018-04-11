@@ -5,38 +5,39 @@ ENV['DATABASE'] = 'bookmark_manager'
 
 class Bookmark
 
+  def self.connection
+    con = PG.connect :dbname => ENV['DATABASE'], :user => USER
+  end
+
   def self.all
 
     begin
 
-        con = PG.connect :dbname => ENV['DATABASE'], :user => USER
+      rs = connection.exec "SELECT * FROM bookmarks"
 
-        rs = con.exec "SELECT * FROM bookmarks"
+      @list = []
 
-        @list = []
+      rs.each do |row|
+        @list << "%s %s" % [ row['id'], row['url'] ]
+      end
 
-        rs.each do |row|
-          @list << "%s %s" % [ row['id'], row['url'] ]
-        end
+      @list
 
-        @list
-
-    rescue PG::Error => e
-
-        puts e.message
-
-    ensure
-
-        rs.clear if rs
-        con.close if con
+    # rescue PG::Error => e
+    #
+    #     puts e.message
+    #
+    # ensure
+    #
+    #     rs.clear if rs
+    #     con.close if con
 
     end
 
   end
 
   def self.add(params)
-    con = PG.connect :dbname => ENV['DATABASE'], :user => USER
-    con.exec "INSERT INTO bookmarks(id, url) VALUES('#{params[:id]}', '#{params[:url]}')"
+    connection.exec "INSERT INTO bookmarks(id, url) VALUES('#{params[:id]}', '#{params[:url]}')"
   end
 
 end
