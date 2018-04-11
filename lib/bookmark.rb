@@ -36,7 +36,7 @@ class Bookmark
 
   def self.add(params)
     con = PG.connect :dbname => ENV['DATABASE'], :user => USER
-    con.exec "INSERT INTO bookmarks(id, url) VALUES('9', '#{params[:url]}')"
+    con.exec "INSERT INTO bookmarks(id, url) VALUES('#{params[:id]}', '#{params[:url]}')"
   end
 
 end
