@@ -1,5 +1,6 @@
 require 'pg'
 require_relative '../local.rb'
+require 'uri'
 
 ENV['DATABASE'] = 'bookmark_manager'
 
@@ -10,32 +11,23 @@ class Bookmark
   end
 
   def self.all
-
-    begin
-
-      rs = connection.exec "SELECT * FROM bookmarks"
-
-      @list = []
-
-      rs.each do |row|
-        @list << "%s %s" % [ row['id'], row['url'] ]
-      end
-
-      @list
-
-    # rescue PG::Error => e
-    #     puts e.message
-    #
-    # ensure
-    #     rs.clear if rs
-    #     con.close if con
-
+    rs = connection.exec "SELECT * FROM bookmarks"
+    @list = []
+    rs.each do |row|
+      @list << "%s %s" % [ row['id'], row['url'] ]
     end
-
+    @list
   end
 
   def self.add(params)
-    connection.exec "INSERT INTO bookmarks(id, url) VALUES('#{params[:id]}', '#{params[:url]}')"
+    return false unless is_url?(params[:url])
+      connection.exec "INSERT INTO bookmarks(id, url) VALUES('#{params[:id]}', '#{params[:url]}')"
+  end
+
+  private
+
+  def self.is_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 
 end
