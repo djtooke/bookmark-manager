@@ -1,8 +1,8 @@
 require 'bookmark'
 
 describe Bookmark do
-  it 'should have a class method to retreive all bookmarks' do
-    expect(Bookmark.all).to include("1 http://google.com")
+  it 'should have a class method to retreive bookmarks from the database' do
+    expect(Bookmark.all[1].title).to eq("Makers Academy")
   end
 
 

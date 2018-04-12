@@ -3,9 +3,9 @@ feature 'Should be able to add a bookmark' do
     visit('/add_bookmark')
     fill_in('id', :with => '3' )
     fill_in('url', :with => 'http://mylittlepony.com' )
+    fill_in('title', :with => 'My Little Pony' )
     click_button 'Submit'
-    visit('/')
-    expect(page).to have_content '3 http://mylittlepony.com'
+    expect(page).to have_content '3 My Little Pony'
   end
 end
 
@@ -14,6 +14,7 @@ feature 'Should not accept an invalid URL' do
     visit('/add_bookmark')
     fill_in('id', :with => '3' )
     fill_in('url', :with => 'NOT A URL' )
+    fill_in('title', :with => 'NOT A URL' )
     click_button 'Submit'
     visit('/')
     expect(page).not_to have_content 'NOT A URL'
@@ -23,6 +24,7 @@ feature 'Should not accept an invalid URL' do
     visit('/add_bookmark')
     fill_in('id', :with => '3' )
     fill_in('url', :with => 'NOT A URL' )
+    fill_in('title', :with => 'NOT A URL' )
     click_button 'Submit'
     expect(page).to have_content 'NOT A URL is not a valid URL'
   end

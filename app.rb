@@ -22,16 +22,3 @@ class BookmarkManager < Sinatra::Base
   end
 
 end
-
-# get '/set_flash' do
-#   flash[:blah] = "You were feeling blah at #{Time.now}."
-#   redirect ('/')
-# end
-#
-# get '/flash_test' do
-#   if flash[:blah]
-#     "Have you ever felt blah? Oh yes. #{flash[:blah]} Remember?"
-#   else
-#     "Oh, now you're only feeling bleh?"
-#   end
-# end

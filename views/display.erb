@@ -5,4 +5,8 @@
   </div>
 <% end %>
 
-<%= Bookmark.all %>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <%= bookmark.id %> <a href="<%= bookmark.url %>"><%= bookmark.title %></a><br>
+  <% end %>
+</ul>
