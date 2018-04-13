@@ -23,13 +23,6 @@ attr_reader :id, :url, :title
     @bookmarks = rs.map do |row|
       Bookmark.new(row['id'], row['title'], row['url'])
     end
-    # In the views, iterate over @bookmarks
-    # The following is what was here before:
-    # @list = []
-    # rs.each do |row|
-    #   @list << "%s %s" % [ row['id'], row['url'] ]
-    # end
-    # @list
     @bookmarks
   end
 
@@ -38,6 +31,12 @@ attr_reader :id, :url, :title
       connection.exec "INSERT INTO bookmarks(id, url, title) VALUES('#{params[:id]}', '#{params[:url]}', '#{params[:title]}')"
   end
 
+  def self.delete(params)
+    params[:delete].each do |bookmark_title|
+      connection.exec("DELETE FROM bookmarks WHERE title = '#{bookmark_title}'")
+    end
+    p params
+  end
   private
 
   def self.is_url?(url)

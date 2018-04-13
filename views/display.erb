@@ -5,8 +5,14 @@
   </div>
 <% end %>
 
-<ul>
+<form action='/bookmarks/delete' method="post">
   <% @bookmarks.each do |bookmark| %>
+    <input type="checkbox" id="<%=bookmark.title%>" name="delete[]" value="<%=bookmark.title%>">
     <%= bookmark.id %> <a href="<%= bookmark.url %>"><%= bookmark.title %></a><br>
   <% end %>
-</ul>
+  <input type="submit" value="Delete" />
+</form>
+
+<form action='/add_bookmark' method='get'>
+  <input type='submit' value='Add Bookmark'>
+</form>
