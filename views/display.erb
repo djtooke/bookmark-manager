@@ -8,7 +8,7 @@
 <form action='/bookmarks/delete' method="post">
   <% @bookmarks.each do |bookmark| %>
     <input type="checkbox" id="<%=bookmark.title%>" name="delete[]" value="<%=bookmark.title%>">
-    <%= bookmark.id %> <a href="<%= bookmark.url %>"><%= bookmark.title %></a><br>
+    <%= bookmark.id %> <a href="<%= bookmark.url %>" target="_blank"><%= bookmark.title %></a><br>
   <% end %>
   <input type="submit" value="Delete" />
 </form>
